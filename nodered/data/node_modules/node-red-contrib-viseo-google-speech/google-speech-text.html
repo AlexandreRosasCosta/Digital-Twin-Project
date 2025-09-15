@@ -1,0 +1,279 @@
+<script type="text/javascript">
+    RED.nodes.registerType('google-speech-text',{
+        category: '🔉_audio',
+        color: '#f9c6c3',
+        defaults: { 
+            name:        { value: undefined },
+            auth:        { value: undefined, type: 'google-service-account', required: true },
+            input:       { value: "payload", required: false },
+            output:      { value: "payload", required: false },
+            inputType:   { value: "msg" },
+            intype:      { value: 'url'},
+            api:         { value: 'stt'},
+            getVoices:   { value: false},
+            encoding:           { value: undefined },
+            encodingType:       { value: 'str' },
+            sampleRateHertz:        { value: undefined },
+            sampleRateHertzType:    { value: 'num' },
+            languageCode:       { value: undefined },
+            languageCodeType:   { value: 'str' },
+            maxAlternatives:        { value: undefined },
+            maxAlternativesType:    { value: 'num' },
+            profanityFilter:        { value: false },
+            profanityFilterType:    { value: 'bool' },
+            speechContexts:         { value: '[]' },
+            speechContextsType:     { value: 'json' },
+            enableWordTimeOffsets:      { value: false },
+            enableWordTimeOffsetsType:  { value: 'bool' },
+            speakingRate:       { value: undefined },
+            speakingRateType:   { value: 'num' },
+            pitch:      { value: undefined },
+            pitchType:  { value: 'num' },
+            volumeGainDb:       { value: undefined },
+            volumeGainDbType:   { value: 'num' },
+            voiceName:      { value: undefined },
+            voiceNameType:  { value: 'str' },
+            ssmlGender:     { value: undefined },
+            ssmlGenderType: { value: 'str' }
+        },
+        inputs:  1,
+        outputs: 1,
+        icon: "gcc.png",
+        align: "left",
+        paletteLabel: 'Speech',
+        label: function() { return this.name || "Google Speech"; },
+        oneditprepare: function() {
+            if (!this.api) this.api = "stt";
+
+            $("#node-input-input").typedInput({  default: 'msg',  types: ['str','json','msg','global'], typeField: $("#node-input-inputType")  });
+            $("#node-input-output").typedInput({ default: 'msg',  types: ['msg'], type:'msg' });
+
+            $("#node-input-encoding").typedInput({ default: 'str', types: ['msg','str'], typeField: $("#node-input-encodingType") });
+            $("#node-input-sampleRateHertz").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-sampleRateHertzType") });
+            $("#node-input-languageCode").typedInput({ default: 'str', types: ['msg','str'], typeField: $("#node-input-languageCodeType") });
+
+            $("#node-input-maxAlternatives").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-maxAlternativesType") });
+            $("#node-input-profanityFilter").typedInput({ default: 'bool', types: ['msg','bool'], typeField: $("#node-input-profanityFilterType") });
+            $("#node-input-speechContexts").typedInput({ default: 'json', types: ['msg','json'], typeField: $("#node-input-speechContextsType") });
+            $("#node-input-enableWordTimeOffsets").typedInput({ default: 'bool', types: ['msg','bool'], typeField: $("#node-input-enableWordTimeOffsetsType") });
+
+            $("#node-input-speakingRate").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-speakingRateType") });
+            $("#node-input-pitch").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-pitchType") });
+            $("#node-input-volumeGainDb").typedInput({ default: 'num', types: ['msg','num'], typeField: $("#node-input-volumeGainDbType") });
+            $("#node-input-voiceName").typedInput({ default: 'str', types: ['msg','str'], typeField: $("#node-input-voiceNameType") });
+            $("#node-input-ssmlGender").typedInput({ default: 'str', types: ['msg','str'], typeField: $("#node-input-ssmlGenderType") });
+            
+            $("#node-input-api").change(function() {
+                $(".stt, .tts").hide();
+                if ($(this).val() === "stt") {
+                    $('.stt').show();
+                    $("#node-input-maxAlternatives, #node-input-profanityFilter").typedInput('show');
+                    $("#node-input-speechContexts, #node-input-enableWordTimeOffsets").typedInput('show');
+                }
+                else {
+                    $('.tts').show();
+                    $("#node-input-speakingRate, #node-input-pitch ,#node-input-volumeGainDb").typedInput('show');
+                    $("#node-input-voiceName, #node-input-ssmlGender").typedInput('show');
+                }
+                $("#node-input-encoding, #node-input-sampleRateHertz ,#node-input-languageCode").typedInput('show');
+            })
+
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="google-speech-text">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <br>
+    <b>Google settings </b>
+
+    <div class="form-row">
+        <br>
+        <label for="node-input-auth"><i class="fa fa-lock"></i> Credentials</label>
+        <input type="text" id="node-input-auth">
+    </div>
+    <div class="form-row">
+        <label for="node-input-api"><i class="fa fa-globe"></i> API</label>
+        <select id="node-input-api" style="width:70%;">
+            <option value="stt" >Speech to text</option>
+            <option value="tts" >Text to speech</option>
+        </select>
+    </div>
+
+    <br>
+    <b>Request settings</b>
+    
+
+    <div class="form-row">
+        <br>
+        <label for="node-input-input"><i class="fa fa-sign-in"></i> Input</label>
+        <input type="text"   id="node-input-input" style="width: 70%" placeholder="payload"/>
+        <input type="hidden" id="node-input-inputType">
+    </div>
+    
+    <div class="form-row stt">
+        <label for="node-input-intype"><i class="fa fa-tasks"></i> Type</label>
+        <select id="node-input-intype" style="width:70%;">
+            <option value="content">Content</option>
+            <option value="path">Path to file</option>
+            <option value="url">URL</option>
+        </select>
+    </div>
+
+    <div class="form-row tts">
+        <label for="node-input-getVoices"><i class="fa fa-microphone"></i> Voices</label>
+        <input type="checkbox" id="node-input-getVoices" style="width: auto; vertical-align:top;"> <span>List available voices for the given language code</span>
+    </div>
+
+    <label><i class="fa fa-globe"></i> Parameters</label>
+    <div style="margin-left: 15px; margin-right: 0px; width: 85px; height: 1px; background-color: lightgrey; display:inline-block;"></div><!--
+    --><div style="margin-left: 0px;  margin-right: 0px; width: 70%;  height: 1px; background-color: lightgrey; display:inline-block;"></div>
+    <br><br>
+
+    <div class="form-row stt tts">
+        <label for="node-input-encoding" style="margin-left:15px; width: 110px; color:#848484"> Encoding</label>
+        <input type="text" id="node-input-encoding" style="width:65%;">
+        <input type="hidden" id="node-input-encodingType">
+    </div>
+    <div class="form-row tts">
+        <label for="node-input-speakingRate" style="margin-left:15px; width: 110px; color:#848484"> Speaking rate</label>
+        <input type="text"   id="node-input-speakingRate" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-speakingRateType">
+    </div>
+    <div class="form-row tts">
+        <label for="node-input-pitch" style="margin-left:15px; width: 110px; color:#848484"> Pitch</label>
+        <input type="text"   id="node-input-pitch" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-pitchType">
+    </div>
+    <div class="form-row tts">
+        <label for="node-input-volumeGainDb" style="margin-left:15px; width: 110px; color:#848484"> Volume gain</label>
+        <input type="text"   id="node-input-volumeGainDb" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-volumeGainDbType">
+    </div>
+    <div class="form-row stt tts">
+        <label for="node-input-sampleRateHertz" style="margin-left:15px; width: 110px; color:#848484"> Sample rate</label>
+        <input type="text"   id="node-input-sampleRateHertz" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-sampleRateHertzType">
+    </div>
+    <div class="form-row stt tts">
+        <label for="node-input-languageCode" style="margin-left:15px; width: 110px; color:#848484"> Language code</label>
+        <input type="text"   id="node-input-languageCode" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-languageCodeType">
+    </div>
+    <div class="form-row tts">
+        <label for="node-input-voiceName" style="margin-left:15px; width: 110px; color:#848484"> Voice name</label>
+        <input type="text"   id="node-input-voiceName" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-voiceNameType">
+    </div>
+    <div class="form-row tts">
+        <label for="node-input-ssmlGender" style="margin-left:15px; width: 110px; color:#848484"> Voice gender</label>
+        <input type="text"   id="node-input-ssmlGender" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-ssmlGenderType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-maxAlternatives" style="margin-left:15px; width: 110px; color:#848484"> Max alternatives</label>
+        <input type="text"   id="node-input-maxAlternatives" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-maxAlternativesType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-profanityFilter" style="margin-left:15px; width: 110px; color:#848484"> Profanity filter</label>
+        <input type="text"   id="node-input-profanityFilter" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-profanityFilterType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-speechContexts" style="margin-left:15px; width: 110px; color:#848484"> Speech contexts</label>
+        <input type="text"   id="node-input-speechContexts" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-speechContextsType">
+    </div>
+    <div class="form-row stt">
+        <label for="node-input-enableWordTimeOffsets" style="margin-left:15px; width: 110px; color:#848484"> Word time offsets</label>
+        <input type="text"   id="node-input-enableWordTimeOffsets" style="width: 65%" placeholder="">
+        <input type="hidden" id="node-input-enableWordTimeOffsetsType">
+    </div>
+
+    <div style="margin-left: 15px; margin-right: 0px; width: 85px; height: 1px; background-color: lightgrey; display:inline-block;"></div><!--
+    --><div style="margin-left: 0px;  margin-right: 0px; width: 70%;  height: 1px; background-color: lightgrey; display:inline-block;"></div>
+    <br><br>
+
+    <div class="form-row">
+        <label for="node-input-output"><i class="fa fa-sign-out""></i> Output</label>
+        <input type="text"   id="node-input-output" style="width: 70%" placeholder="payload"/>  
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="google-speech-text">
+
+    <p>Processes Speech to Text (STT) or Text to Speech (TTS) with Google services.</p>
+
+    <h3>Details</h3>
+    <p>Properties</p>
+    <dl class="message-properties">
+        <dt>Credentials <span class="property-type">config</span></dt>
+        <dd>informations from a Google Service Account</dd>
+        <dt>Output <span class="property-type">string</span></dt>
+        <dd>where to store the results</dd>
+    </dl>
+    <p><b>TTS</b> needs at least the voice information. The ouput will be an object containing an audio buffer. </p>
+    <p>TTS properties</p>
+    <dl class="message-properties">
+        <dt>Input<span class="property-type">string</span></dt>
+        <dd>should be either a text or a SSML element. The node will detect SSML with the presence of '<speak>'</dd>
+        <dt>Voices</dt>
+        <dd>check if you want to get all the available voices (for the given language code) in the response</dd>
+        <dt>Encoding<span class="property-type">string</span></dt>
+        <dd>possible values are 'AUDIO_ENCODING_UNSPECIFIED', 'LINEAR16', 'MP3' or 'OGG_OPUS'</dd>
+        <dt>Speaking rate<span class="property-type">number</span></dt>
+        <dd>rate/speed, in the range [0.25, 4.0], where 1.0 is the normal native speed, 2.0 is twice as fast, 0.5 is half as fast</dd>
+        <dt>Pitch <span class="property-type">number</span></dt>
+        <dd>speaking pitch, in the range [-20.0, 20.0], where 20 means increase 20 semitones and -20 means decrease 20 semitones from the original pitch</dd>
+        <dt>Volume gain <span class="property-type">number</span></dt>
+        <dd>volume gain (in dB) of the normal native volume supported by the specific voice, in the range [-96.0, 16.0]</dd>
+        <dt>Sample rate <span class="property-type">number</span></dt>
+        <dd>the synthesis sample rate (in hertz) for this audio</dd>
+        <dt>Language code <span class="property-type">string</span></dt>
+        <dd>the language (and optionally also the region) of the voice expressed as a BCP-47 language tag, e.g. "en-US"</dd>
+        <dt>Voice name <span class="property-type">string</span></dt>
+        <dd>the name of the voice</dd>
+        <dt>Voice gender <span class="property-type">string</span></dt>
+        <dd>possible values are 'SSML_VOICE_GENDER_UNSPECIFIED', 'MALE', 'FEMALE' or 'NEUTRAL'</dd>
+    </dl> 
+    <p><b>STT</b> needs at least a rate and a language code. The required <i>Input</i> depends on the given type: a Google Cloud Storage URI that points to a file, audio bytes (base64-encoded string), or a path to a file</p>
+    <p>STT properties</p>
+    <dl class="message-properties">
+        <dt>Input<span class="property-type">string</span></dt>
+        <dd>should be a Google Cloud Storage URI that points to a file, audio bytes (base64-encoded string), or a path to a file</dd>
+        <dt>Type<span class="property-type">string</span></dt>
+        <dd>the corresponding input type</dd>
+        <dt>Encoding<span class="property-type">string</span></dt>
+        <dd>possible values are 'ENCODING_UNSPECIFIED', 'LINEAR16', 'FLAC', 'MULAW', 'AMR', 'AMR_WB', 'OGG_OPUS' or 'SPEEX_WITH_HEADER_BYTE'</dd>
+        <dt>Sample rate <span class="property-type">number</span></dt>
+        <dd>sample rate in Hertz of the audio data sent, in the range [8000-48000], where 16000 is optimal</dd>
+        <dt>Language code <span class="property-type">string</span></dt>
+        <dd>the language (and optionally also the region) of the voice expressed as a BCP-47 language tag, e.g. "en-US"</dd>
+        <dt>Max alternatives <span class="property-type">number</span></dt>
+        <dd>maximum number of recognition hypotheses to be returned, in the range [0-30]</dd>
+        <dt>Profanity filter <span class="property-type">boolean</span></dt>
+        <dd>if set to true, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g. "f***"</dd>
+        <dt>Speech contexts <span class="property-type">array</span></dt>
+        <dd>a means to provide context to assist the speech recognition - array of { "phrases": [ string ] } objects</dd>
+        <dt>Word time offsets <span class="property-type">boolean</span></dt>
+        <dd>if true, the top result includes a list of words and the start and end time offsets (timestamps) for those words</dd>
+    </dl> 
+    <h3>References</h3>
+    <ul>
+        <li><a href="https://cloud.google.com/speech-to-text/docs/reference/rest/v1/RecognitionConfig">Speech-To-Text</a> - documentation</li>
+        <li><a href="https://cloud.google.com/text-to-speech/docs/reference/rest/v1beta1/text/synthesize">Text-To-Speech</a> - documentation</li>
+        <li><a href="https://github.com/NGRP/node-red-contrib-viseo/">VISEO BotMaker</a> - the nodes github repository</li>
+    </ul>
+
+    <h3>Tracking</h3>
+    <p>This node is likely to display an error message if no key is configured in the VISEO Bot Maker project.
+        If such an error appears, please get a key <a href="https://key.bot.viseo.io/">here</a>.  
+    </p>
+
+</script>

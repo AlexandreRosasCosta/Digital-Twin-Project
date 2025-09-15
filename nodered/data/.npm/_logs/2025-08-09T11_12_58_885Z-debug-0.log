@@ -1,0 +1,97 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-contrib-browser-utils@0.0.11
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-contrib-browser-utils@0.0.11"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-08-09T11_12_58_885Z-
+10 verbose logfile /data/.npm/_logs/2025-08-09T11_12_58_885Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest node-red-contrib-browser-utils@0.0.11
+15 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-browser-utils cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-browser-utils 988ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-browser-utils set size:undefined disposed:false
+18 silly placeDep ROOT node-red-contrib-browser-utils@0.0.11 OK for: node-red-project@0.0.1 want: 0.0.11
+19 silly fetch manifest body-parser@^1.20.0
+20 silly packumentCache full:https://registry.npmjs.org/body-parser cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/body-parser 48ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/body-parser set size:undefined disposed:false
+23 silly placeDep ROOT body-parser@1.20.3 OK for: node-red-contrib-browser-utils@0.0.11 want: ^1.20.0
+24 silly fetch manifest qs@6.13.0
+25 silly packumentCache full:https://registry.npmjs.org/qs cache-miss
+26 silly fetch manifest unpipe@1.0.0
+27 silly packumentCache full:https://registry.npmjs.org/unpipe cache-miss
+28 silly fetch manifest type-is@~1.6.18
+29 silly packumentCache full:https://registry.npmjs.org/type-is cache-miss
+30 silly fetch manifest raw-body@2.5.2
+31 silly packumentCache full:https://registry.npmjs.org/raw-body cache-miss
+32 silly fetch manifest iconv-lite@0.4.24
+33 silly packumentCache full:https://registry.npmjs.org/iconv-lite cache-miss
+34 silly fetch manifest content-type@~1.0.5
+35 silly packumentCache full:https://registry.npmjs.org/content-type cache-miss
+36 http fetch GET 200 https://registry.npmjs.org/unpipe 50ms (cache miss)
+37 silly packumentCache full:https://registry.npmjs.org/unpipe set size:undefined disposed:false
+38 http fetch GET 200 https://registry.npmjs.org/content-type 86ms (cache miss)
+39 silly packumentCache full:https://registry.npmjs.org/content-type set size:undefined disposed:false
+40 http fetch GET 200 https://registry.npmjs.org/iconv-lite 94ms (cache revalidated)
+41 silly packumentCache full:https://registry.npmjs.org/iconv-lite set size:115994 disposed:false
+42 http fetch GET 200 https://registry.npmjs.org/qs 100ms (cache revalidated)
+43 silly packumentCache full:https://registry.npmjs.org/qs set size:264677 disposed:false
+44 http fetch GET 200 https://registry.npmjs.org/raw-body 105ms (cache miss)
+45 silly packumentCache full:https://registry.npmjs.org/raw-body set size:undefined disposed:false
+46 http fetch GET 200 https://registry.npmjs.org/type-is 111ms (cache miss)
+47 silly packumentCache full:https://registry.npmjs.org/type-is set size:undefined disposed:false
+48 silly placeDep ROOT content-type@1.0.5 OK for: body-parser@1.20.3 want: ~1.0.5
+49 silly placeDep node_modules/body-parser iconv-lite@0.4.24 OK for: body-parser@1.20.3 want: 0.4.24
+50 silly placeDep node_modules/body-parser qs@6.13.0 OK for: body-parser@1.20.3 want: 6.13.0
+51 silly placeDep ROOT raw-body@2.5.2 OK for: body-parser@1.20.3 want: 2.5.2
+52 silly placeDep ROOT type-is@1.6.18 OK for: body-parser@1.20.3 want: ~1.6.18
+53 silly placeDep ROOT unpipe@1.0.0 OK for: body-parser@1.20.3 want: 1.0.0
+54 silly fetch manifest media-typer@0.3.0
+55 silly packumentCache full:https://registry.npmjs.org/media-typer cache-miss
+56 http fetch GET 200 https://registry.npmjs.org/media-typer 30ms (cache miss)
+57 silly packumentCache full:https://registry.npmjs.org/media-typer set size:undefined disposed:false
+58 silly placeDep node_modules/raw-body iconv-lite@0.4.24 OK for: raw-body@2.5.2 want: 0.4.24
+59 silly placeDep ROOT media-typer@0.3.0 OK for: type-is@1.6.18 want: 0.3.0
+60 silly reify moves {}
+61 silly tarball no local data for media-typer@https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz. Extracting by manifest.
+62 silly tarball no local data for type-is@https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz. Extracting by manifest.
+63 silly tarball no local data for unpipe@https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz. Extracting by manifest.
+64 silly tarball no local data for raw-body@https://registry.npmjs.org/raw-body/-/raw-body-2.5.2.tgz. Extracting by manifest.
+65 silly tarball no local data for content-type@https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz. Extracting by manifest.
+66 silly tarball no local data for body-parser@https://registry.npmjs.org/body-parser/-/body-parser-1.20.3.tgz. Extracting by manifest.
+67 silly tarball no local data for node-red-contrib-browser-utils@https://registry.npmjs.org/node-red-contrib-browser-utils/-/node-red-contrib-browser-utils-0.0.11.tgz. Extracting by manifest.
+68 silly tarball no local data for iconv-lite@https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz. Extracting by manifest.
+69 silly tarball no local data for qs@https://registry.npmjs.org/qs/-/qs-6.13.0.tgz. Extracting by manifest.
+70 silly tarball no local data for iconv-lite@https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz. Extracting by manifest.
+71 http fetch GET 200 https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz 84ms (cache miss)
+72 http fetch GET 200 https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz 86ms (cache miss)
+73 http fetch GET 200 https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz 88ms (cache miss)
+74 http fetch GET 200 https://registry.npmjs.org/body-parser/-/body-parser-1.20.3.tgz 86ms (cache miss)
+75 http fetch GET 200 https://registry.npmjs.org/raw-body/-/raw-body-2.5.2.tgz 87ms (cache miss)
+76 http fetch GET 200 https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz 123ms (cache miss)
+77 http fetch GET 200 https://registry.npmjs.org/qs/-/qs-6.13.0.tgz 126ms (cache miss)
+78 http fetch GET 200 https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz 162ms (cache miss)
+79 http fetch GET 200 https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz 181ms (cache miss)
+80 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-browser-utils/-/node-red-contrib-browser-utils-0.0.11.tgz 791ms (cache miss)
+81 silly ADD node_modules/media-typer
+82 silly ADD node_modules/unpipe
+83 silly ADD node_modules/type-is
+84 silly ADD node_modules/raw-body
+85 silly ADD node_modules/raw-body/node_modules/iconv-lite
+86 silly ADD node_modules/content-type
+87 silly ADD node_modules/body-parser
+88 silly ADD node_modules/body-parser/node_modules/qs
+89 silly ADD node_modules/body-parser/node_modules/iconv-lite
+90 silly ADD node_modules/node-red-contrib-browser-utils
+91 verbose cwd /data
+92 verbose os Linux 6.8.0-71-generic
+93 verbose node v20.19.4
+94 verbose npm  v10.8.2
+95 verbose exit 0
+96 info ok

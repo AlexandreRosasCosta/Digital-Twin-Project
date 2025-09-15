@@ -1,0 +1,47 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-contrib-stackhero-influxdb-v2@1.0.4
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-contrib-stackhero-influxdb-v2@1.0.4"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-08-09T12_07_27_164Z-
+10 verbose logfile /data/.npm/_logs/2025-08-09T12_07_27_164Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest node-red-contrib-stackhero-influxdb-v2@1.0.4
+15 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-stackhero-influxdb-v2 cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-stackhero-influxdb-v2 824ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-stackhero-influxdb-v2 set size:undefined disposed:false
+18 silly placeDep ROOT node-red-contrib-stackhero-influxdb-v2@1.0.4 OK for: node-red-project@0.0.1 want: 1.0.4
+19 silly fetch manifest influxdb-v2@1.0.0
+20 silly packumentCache full:https://registry.npmjs.org/influxdb-v2 cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/influxdb-v2 682ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/influxdb-v2 set size:undefined disposed:false
+23 silly placeDep ROOT influxdb-v2@1.0.0 OK for: node-red-contrib-stackhero-influxdb-v2@1.0.4 want: 1.0.0
+24 silly fetch manifest node-fetch@^2.6.1
+25 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+26 http fetch GET 200 https://registry.npmjs.org/node-fetch 71ms (cache revalidated)
+27 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:896010 disposed:false
+28 silly fetch manifest encoding@^0.1.0
+29 silly packumentCache full:https://registry.npmjs.org/encoding cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/encoding 48ms (cache revalidated)
+31 silly packumentCache full:https://registry.npmjs.org/encoding set size:17833 disposed:false
+32 silly placeDep node_modules/influxdb-v2 node-fetch@2.7.0 OK for: influxdb-v2@1.0.0 want: ^2.6.1
+33 silly reify moves {}
+34 silly tarball no local data for influxdb-v2@https://registry.npmjs.org/influxdb-v2/-/influxdb-v2-1.0.0.tgz. Extracting by manifest.
+35 silly tarball no local data for node-red-contrib-stackhero-influxdb-v2@https://registry.npmjs.org/node-red-contrib-stackhero-influxdb-v2/-/node-red-contrib-stackhero-influxdb-v2-1.0.4.tgz. Extracting by manifest.
+36 http fetch GET 200 https://registry.npmjs.org/influxdb-v2/-/influxdb-v2-1.0.0.tgz 693ms (cache miss)
+37 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-stackhero-influxdb-v2/-/node-red-contrib-stackhero-influxdb-v2-1.0.4.tgz 1425ms (cache miss)
+38 silly ADD node_modules/influxdb-v2
+39 silly ADD node_modules/influxdb-v2/node_modules/node-fetch
+40 silly ADD node_modules/node-red-contrib-stackhero-influxdb-v2
+41 verbose cwd /data
+42 verbose os Linux 6.8.0-71-generic
+43 verbose node v20.19.4
+44 verbose npm  v10.8.2
+45 verbose exit 0
+46 info ok

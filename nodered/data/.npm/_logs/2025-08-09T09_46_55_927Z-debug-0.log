@@ -1,0 +1,31 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install @background404/node-red-contrib-whisper@0.0.3
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "@background404/node-red-contrib-whisper@0.0.3"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-08-09T09_46_55_927Z-
+10 verbose logfile /data/.npm/_logs/2025-08-09T09_46_55_927Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest @background404/node-red-contrib-whisper@0.0.3
+15 silly packumentCache full:https://registry.npmjs.org/@background404%2fnode-red-contrib-whisper cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/@background404%2fnode-red-contrib-whisper 1601ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/@background404%2fnode-red-contrib-whisper set size:undefined disposed:false
+18 silly placeDep ROOT @background404/node-red-contrib-whisper@0.0.3 OK for: node-red-project@0.0.1 want: 0.0.3
+19 silly reify moves {}
+20 silly tarball no local data for @background404/node-red-contrib-whisper@https://registry.npmjs.org/@background404/node-red-contrib-whisper/-/node-red-contrib-whisper-0.0.3.tgz. Extracting by manifest.
+21 http fetch GET 200 https://registry.npmjs.org/@background404/node-red-contrib-whisper/-/node-red-contrib-whisper-0.0.3.tgz 1239ms (cache miss)
+22 info run @background404/node-red-contrib-whisper@0.0.3 preinstall node_modules/@background404/node-red-contrib-whisper python setup.py
+23 info run @background404/node-red-contrib-whisper@0.0.3 preinstall { code: 0, signal: null }
+24 silly ADD node_modules/@background404/node-red-contrib-whisper
+25 verbose cwd /data
+26 verbose os Linux 6.8.0-71-generic
+27 verbose node v20.19.4
+28 verbose npm  v10.8.2
+29 verbose exit 0
+30 info ok

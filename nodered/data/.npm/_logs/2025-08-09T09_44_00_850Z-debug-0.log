@@ -1,0 +1,85 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-contrib-google-tts@1.1.1
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-contrib-google-tts@1.1.1"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-08-09T09_44_00_850Z-
+10 verbose logfile /data/.npm/_logs/2025-08-09T09_44_00_850Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest node-red-contrib-google-tts@1.1.1
+15 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-google-tts cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-google-tts 756ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-google-tts set size:undefined disposed:false
+18 silly placeDep ROOT node-red-contrib-google-tts@1.1.1 OK for: node-red-project@0.0.1 want: 1.1.1
+19 silly fetch manifest isomorphic-fetch@2.2.*
+20 silly packumentCache full:https://registry.npmjs.org/isomorphic-fetch cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/isomorphic-fetch 37ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/isomorphic-fetch set size:undefined disposed:false
+23 silly placeDep ROOT isomorphic-fetch@2.2.1 OK for: node-red-contrib-google-tts@1.1.1 want: 2.2.*
+24 silly fetch manifest node-fetch@^1.0.1
+25 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+26 silly fetch manifest whatwg-fetch@>=0.10.0
+27 silly packumentCache full:https://registry.npmjs.org/whatwg-fetch cache-miss
+28 http fetch GET 200 https://registry.npmjs.org/whatwg-fetch 37ms (cache miss)
+29 silly packumentCache full:https://registry.npmjs.org/whatwg-fetch set size:undefined disposed:false
+30 http fetch GET 200 https://registry.npmjs.org/node-fetch 101ms (cache miss)
+31 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:undefined disposed:false
+32 silly placeDep ROOT node-fetch@1.7.3 OK for: isomorphic-fetch@2.2.1 want: ^1.0.1
+33 silly placeDep ROOT whatwg-fetch@3.6.20 OK for: isomorphic-fetch@2.2.1 want: >=0.10.0
+34 silly fetch manifest encoding@^0.1.11
+35 silly packumentCache full:https://registry.npmjs.org/encoding cache-miss
+36 silly fetch manifest is-stream@^1.0.1
+37 silly packumentCache full:https://registry.npmjs.org/is-stream cache-miss
+38 http fetch GET 200 https://registry.npmjs.org/encoding 30ms (cache miss)
+39 silly packumentCache full:https://registry.npmjs.org/encoding set size:undefined disposed:false
+40 http fetch GET 200 https://registry.npmjs.org/is-stream 53ms (cache miss)
+41 silly packumentCache full:https://registry.npmjs.org/is-stream set size:undefined disposed:false
+42 silly placeDep ROOT encoding@0.1.13 OK for: node-fetch@1.7.3 want: ^0.1.11
+43 silly placeDep ROOT is-stream@1.1.0 OK for: node-fetch@1.7.3 want: ^1.0.1
+44 silly fetch manifest iconv-lite@^0.6.2
+45 silly packumentCache full:https://registry.npmjs.org/iconv-lite cache-miss
+46 http fetch GET 200 https://registry.npmjs.org/iconv-lite 55ms (cache miss)
+47 silly packumentCache full:https://registry.npmjs.org/iconv-lite set size:undefined disposed:false
+48 silly placeDep ROOT iconv-lite@0.6.3 OK for: encoding@0.1.13 want: ^0.6.2
+49 silly fetch manifest safer-buffer@>= 2.1.2 < 3.0.0
+50 silly packumentCache full:https://registry.npmjs.org/safer-buffer cache-miss
+51 http fetch GET 200 https://registry.npmjs.org/safer-buffer 44ms (cache miss)
+52 silly packumentCache full:https://registry.npmjs.org/safer-buffer set size:undefined disposed:false
+53 silly placeDep ROOT safer-buffer@2.1.2 OK for: iconv-lite@0.6.3 want: >= 2.1.2 < 3.0.0
+54 silly reify moves {}
+55 silly tarball no local data for is-stream@https://registry.npmjs.org/is-stream/-/is-stream-1.1.0.tgz. Extracting by manifest.
+56 silly tarball no local data for iconv-lite@https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz. Extracting by manifest.
+57 silly tarball no local data for safer-buffer@https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz. Extracting by manifest.
+58 silly tarball no local data for node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-1.7.3.tgz. Extracting by manifest.
+59 silly tarball no local data for encoding@https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz. Extracting by manifest.
+60 silly tarball no local data for isomorphic-fetch@https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz. Extracting by manifest.
+61 silly tarball no local data for node-red-contrib-google-tts@https://registry.npmjs.org/node-red-contrib-google-tts/-/node-red-contrib-google-tts-1.1.1.tgz. Extracting by manifest.
+62 silly tarball no local data for whatwg-fetch@https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.20.tgz. Extracting by manifest.
+63 http fetch GET 200 https://registry.npmjs.org/is-stream/-/is-stream-1.1.0.tgz 74ms (cache miss)
+64 http fetch GET 200 https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz 82ms (cache miss)
+65 http fetch GET 200 https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz 90ms (cache miss)
+66 http fetch GET 200 https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.20.tgz 100ms (cache miss)
+67 http fetch GET 200 https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz 104ms (cache miss)
+68 http fetch GET 200 https://registry.npmjs.org/node-fetch/-/node-fetch-1.7.3.tgz 106ms (cache miss)
+69 http fetch GET 200 https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz 119ms (cache miss)
+70 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-google-tts/-/node-red-contrib-google-tts-1.1.1.tgz 136ms (cache miss)
+71 silly ADD node_modules/safer-buffer
+72 silly ADD node_modules/iconv-lite
+73 silly ADD node_modules/is-stream
+74 silly ADD node_modules/encoding
+75 silly ADD node_modules/whatwg-fetch
+76 silly ADD node_modules/node-fetch
+77 silly ADD node_modules/isomorphic-fetch
+78 silly ADD node_modules/node-red-contrib-google-tts
+79 verbose cwd /data
+80 verbose os Linux 6.8.0-71-generic
+81 verbose node v20.19.4
+82 verbose npm  v10.8.2
+83 verbose exit 0
+84 info ok

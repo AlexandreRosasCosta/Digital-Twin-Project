@@ -1,0 +1,418 @@
+[
+    {
+        "id": "f03f906cf575b6f4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6accc7e13d9bca3e",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "13519c8d80d381af",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "b6ff514162700234",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "6accc7e13d9bca3e",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e799b529c46048b5",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.217.228:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "c0b76c7ed4dcfac2",
+        "type": "http request",
+        "z": "f03f906cf575b6f4",
+        "name": "GET Ditto",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://192.168.217.228:8080/api/2/things/",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "ac6a8ac0a3248a7a"
+            ]
+        ]
+    },
+    {
+        "id": "ac6a8ac0a3248a7a",
+        "type": "function",
+        "z": "f03f906cf575b6f4",
+        "name": "Get data",
+        "func": "if (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    const f = msg.payload[0].features || {};\n    msg.payload = {\n        temperature: f.temperature?.properties?.value ?? null,\n        humidity: f.humidity?.properties?.value ?? null,\n        occupancy: f.occupancy?.properties?.value ?? null,\n        energy: f.energy?.properties?.value ?? null\n    };\n    msg.topic = \"sensors\";\n} else {\n    msg.payload = { error: \"Nenhum thing encontrado\" };\n}\nmsg.topic = \"sensors\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "46aacb9f9d928db8"
+            ]
+        ]
+    },
+    {
+        "id": "e6870e9889fbf539",
+        "type": "http request",
+        "z": "f03f906cf575b6f4",
+        "name": "POST Ollama Model",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.217.228:11434/api/generate",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/json"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Accept",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "ba6b4c0cd6c74b66"
+            ]
+        ]
+    },
+    {
+        "id": "8228338d24ecc612",
+        "type": "function",
+        "z": "f03f906cf575b6f4",
+        "name": "Build prompt",
+        "func": "const s = msg.payload?.sensors || {};\nconst h = msg.payload?.history || {};\n\nconst sensorsTxt = `Sensores (atuais):\n- Temperatura: ${s.temperature} °C\n- Umidade: ${s.humidity} %\n- Ocupação: ${s.occupancy} ${s.occupancy === 1 ? 'pessoa' : 'pessoas'}\n- Energia Consumida: ${s.energy} Wh`;\n\nconst historyTxt = `Média (últimos ${h.windowDays ?? 7} dias, n=${h.samples ?? 'n/d'}):\n- Temperatura: ${h.avgTemp ?? 'n/d'} °C\n- Umidade: ${h.avgHumidity ?? 'n/d'} %\n- Ocupação: ${h.avgOccupancy ?? 'n/d'}\n- Energia: ${h.avgEnergy ?? 'n/d'} Wh`;\n\nconst userText = \"Consegue me falar qual é a energia consumida, a umidade, a temperatura e a ocupação da sala? Além disso, consegue me dizer se estes valores estão de acordo?\";\n\nmsg.payload = {\n  model: \"llama3.2\",\n  prompt: `${sensorsTxt}\\n\\n${historyTxt}\\n\\nPergunta do usuário: ${userText}\\nResponda em português, de forma breve.`,\n  stream: false,\n  options: { temperature: 0.3 }\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 220,
+        "wires": [
+            [
+                "e6870e9889fbf539"
+            ]
+        ]
+    },
+    {
+        "id": "ba6b4c0cd6c74b66",
+        "type": "function",
+        "z": "f03f906cf575b6f4",
+        "name": "Extract text",
+        "func": "if (typeof msg.payload === \"string\") {\n    try { msg.payload = JSON.parse(msg.payload); } catch (e) { }\n}\nconst txt = msg.payload?.response\n    || msg.payload?.message?.content\n    || JSON.stringify(msg.payload);\nmsg.payload = txt ?? \"Sem resposta do modelo.\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 340,
+        "wires": [
+            [
+                "36061b9bdde905f3",
+                "7b0c6cfbae61e05d"
+            ]
+        ]
+    },
+    {
+        "id": "36061b9bdde905f3",
+        "type": "ui_template",
+        "z": "f03f906cf575b6f4",
+        "group": "b6ff514162700234",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n    (function(scope){\n  scope.$watch('msg', function(msg){\n    if(!msg || !msg.payload) return;\n    const u = new SpeechSynthesisUtterance(String(msg.payload));\n    u.lang = 'pt-PT'; // ou 'pt-BR'\n    speechSynthesis.speak(u);\n  });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 720,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "52c0799948c695e5",
+        "type": "inject",
+        "z": "f03f906cf575b6f4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "c0b76c7ed4dcfac2",
+                "0a12fd78ba07d6bd"
+            ]
+        ]
+    },
+    {
+        "id": "3d7a1f6bc0563af3",
+        "type": "ui_template",
+        "z": "f03f906cf575b6f4",
+        "group": "b6ff514162700234",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div style=\"display:flex;gap:8px;align-items:center\">\n  <button id=\"btn-{{$id}}\" class=\"nr-dashboard-button\">🎤 Falar</button>\n  <span id=\"st-{{$id}}\"></span>\n</div>\n\n<script>\n  (function(scope){\n  const btnId = 'btn-{{$id}}';\n  const stId  = 'st-{{$id}}';\n  const btn = document.getElementById(btnId);\n  const st  = document.getElementById(stId);\n\n  const supported = ('SpeechRecognition' in window) || ('webkitSpeechRecognition' in window);\n  if (!supported) {\n    st.textContent = 'STT não suportado no navegador';\n    return;\n  }\n\n  const SR  = window.SpeechRecognition || window.webkitSpeechRecognition;\n  const rec = new SR();\n  rec.lang = 'pt-PT';           // ou 'pt-BR'\n  rec.interimResults = false;\n  rec",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 420,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "290a13c644dc1e70",
+        "type": "function",
+        "z": "f03f906cf575b6f4",
+        "name": "history",
+        "func": "const row = (Array.isArray(msg.payload) && msg.payload[0]) || {};\nconst num = x => (typeof x === \"number\" && isFinite(x)) ? +x.toFixed(1) : null;\n\nmsg.payload = {\n  avgTemp:      num(row.temperature),\n  avgHumidity:  num(row.humidity),\n  avgOccupancy: num(row.occupancy),\n  avgEnergy:    num(row.energy),\n  windowDays:   7\n};\nmsg.topic = \"history\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "46aacb9f9d928db8"
+            ]
+        ]
+    },
+    {
+        "id": "0a12fd78ba07d6bd",
+        "type": "influxdb in",
+        "z": "f03f906cf575b6f4",
+        "influxdb": "e799b529c46048b5",
+        "name": "",
+        "query": "from(bucket: \"Smart-Classroom\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r._measurement == \"digital_twin\")\n  |> filter(fn: (r) =>\n    r._field == \"energy\" or r._field == \"humidity\" or\n    r._field == \"occupancy\" or r._field == \"temperature\"\n  )\n  |> mean()\n  |> pivot(rowKey: [\"_measurement\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> keep(columns: [\"energy\",\"humidity\",\"occupancy\",\"temperature\"])\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "org-project",
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "290a13c644dc1e70"
+            ]
+        ]
+    },
+    {
+        "id": "46aacb9f9d928db8",
+        "type": "join",
+        "z": "f03f906cf575b6f4",
+        "name": "Join",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "8228338d24ecc612"
+            ]
+        ]
+    },
+    {
+        "id": "7b0c6cfbae61e05d",
+        "type": "debug",
+        "z": "f03f906cf575b6f4",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    }
+]

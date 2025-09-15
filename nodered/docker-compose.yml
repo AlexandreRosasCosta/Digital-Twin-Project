@@ -1,0 +1,20 @@
+services:
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    environment:
+      - TZ=Europe/Lisbon
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:1880"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    name: nodered_net

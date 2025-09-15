@@ -24,7 +24,7 @@ The project explores **open-source platforms** for Digital Twin development, app
   3. Eclipse Ditto → Telegraf / InfluxDB  
   4. Grafana / Node-RED / Unity / Ollama  
 
-![Architecture Diagram](Images/Diagrama_fluxo_dados.jpeg)
+![Architecture Diagram](Images/Diagrama_fluxo_dados.jpg)
 
 ---
 
